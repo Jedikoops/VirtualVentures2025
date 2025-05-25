@@ -1,0 +1,143 @@
+[gd_scene load_steps=21 format=3 uid="uid://cja07gkqhjkmu"]
+
+[ext_resource type="Texture2D" uid="uid://bag61i73805ns" path="res://icon.svg" id="1_3a8k0"]
+[ext_resource type="Script" uid="uid://c05gmk5axcirt" path="res://Levels/player.gd" id="1_c4xql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_foes3"]
+size = Vector2(807, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3a8k0"]
+radius = 13.0
+height = 56.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4xql"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r52jk"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csqc5"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rclbk"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqhhm"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia3a1"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7aja"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m5r8"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dvbe"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sto2r"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqype"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8p17"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ig7y"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwwu4"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j01k"]
+atlas = ExtResource("1_3a8k0")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubsdk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4xql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r52jk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csqc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rclbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqhhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia3a1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7aja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m5r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dvbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sto2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqype")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8p17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ig7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwwu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j01k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(544, 422)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_foes3")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(471, 167)
+script = ExtResource("1_c4xql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_3a8k0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_ubsdk")
+autoplay = "default"

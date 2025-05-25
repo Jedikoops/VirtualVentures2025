@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp8nf0kd54ere"]
+
+[ext_resource type="Texture2D" uid="uid://dqj3elscfohao" path="res://07f405eaabd473314200b4feadcb8f0d.jpg" id="1_4qybw"]
+
+[sub_resource type="Gradient" id="Gradient_w5vcv"]
+offsets = PackedFloat32Array(0, 0.52921, 1)
+colors = PackedColorArray(0.23791, 0.37, 0.2146, 0.709804, 0.621, 0.85815, 0.9, 0.772549, 1, 1, 1, 0.843137)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d2d4f"]
+gradient = SubResource("Gradient_w5vcv")
+fill_from = Vector2(0, 1)
+
+[node name="NiceBackgroundTemp" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4qybw")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_d2d4f")
