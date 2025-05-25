@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3d22mb6yitfn"]
+
+[ext_resource type="Script" uid="uid://prakt7j3tgk4" path="res://EvilStuff/space_ship.gd" id="1_3jc1u"]
+[ext_resource type="Texture2D" uid="uid://bag61i73805ns" path="res://icon.svg" id="2_ow33v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qbnm"]
+size = Vector2(32, 32)
+
+[node name="SpaceShip" type="CharacterBody2D"]
+script = ExtResource("1_3jc1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8qbnm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_ow33v")
