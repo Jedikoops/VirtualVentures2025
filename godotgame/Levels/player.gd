@@ -8,6 +8,7 @@ enum STATE {MOVE, CLIMB, HIT, SWIM, FLY, DIG}
 #digging like pepper grinder
 
 const SPEED = 100.0
+const CLIMB_SPEED = 80.0
 const SWIM_SPEED = 120.0
 const JUMP_VELOCITY = 280.0
 const GLIDE_SPEED = 30.0
@@ -57,11 +58,21 @@ func _physics_process(delta: float) -> void:
 				else:
 					state = STATE.FLY
 					reset_flip()
-					jump(JUMP_VELOCITY * 0.4)
+					#jump(JUMP_VELOCITY * 0.3) you can choose to jump or just take the falling
 				
 			move_and_slide()
 		STATE.CLIMB:
 			anim.play("climbing")
+			var input = Vector2(x_input, y_input).normalized()
+			velocity  = input * CLIMB_SPEED
+			if velocity.x:
+				rig.scale.x = update_flip()
+			if Input.is_action_just_pressed("jump"):
+					jump(JUMP_VELOCITY * 1.2)
+					state = STATE.MOVE
+					reset_flip()
+			if not climbing:
+				state = STATE.MOVE
 			
 			move_and_slide()
 		STATE.SWIM:
@@ -96,6 +107,7 @@ func _physics_process(delta: float) -> void:
 			
 			if Input.is_action_just_pressed("jump") and not is_on_floor() and climbing:
 				state = STATE.CLIMB
+				reset_flip()
 			
 			apply_friction(delta, 0.2 * Vector2.ONE)
 			move_and_slide()
@@ -212,11 +224,8 @@ func apply_friction(delta, dir := Vector2.RIGHT) -> void:
 func update_flip() -> int: #completed
 	if velocity.x > 0: 
 		return -1
-		rig.scale.x = -1
 	else:
 		return 1
-	if velocity.x < 0:
-		rig.scale.x = 1
 
 func reset_flip() -> void:
 	if state != STATE.FLY:

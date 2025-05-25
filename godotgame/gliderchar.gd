@@ -21,7 +21,7 @@ func _try_dig(delta):
 	velocity = Vector2.RIGHT.rotated(global_rotation) * SPEED
 	rotation = rotate_toward(rotation, (get_global_mouse_position() - self.position).angle(),  10 * delta)
 	
-func	 _try_move(delta):
+func _try_move(delta):
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if(velocity.length() > SPEED) or not direction:
 		apply_friction(delta)

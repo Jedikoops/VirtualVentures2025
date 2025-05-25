@@ -1131,7 +1131,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_0e48y")
 }
 autoplay = "idle"
-blend_times = [&"climbing", &"idle", 0.5, &"climbing", &"jump", 0.5, &"climbing", &"run", 0.5, &"climbing", &"swimming", 0.5, &"flying", &"climbing", 0.5, &"flying", &"idle", 0.5, &"flying", &"jump", 0.5, &"flying", &"run", 0.5, &"flying", &"swimming", 0.5, &"idle", &"jump", 0.1, &"idle", &"run", 0.5, &"jump", &"idle", 0.1, &"jump", &"run", 0.1, &"jump", &"swimming", 0.5, &"run", &"idle", 0.5, &"run", &"jump", 0.1]
+blend_times = [&"climbing", &"flying", 0.2, &"climbing", &"idle", 0.5, &"climbing", &"jump", 0.05, &"climbing", &"run", 0.5, &"climbing", &"swimming", 0.5, &"flying", &"climbing", 0.5, &"flying", &"flying", 0.2, &"flying", &"idle", 0.5, &"flying", &"jump", 0.5, &"flying", &"run", 0.5, &"flying", &"swimming", 0.5, &"idle", &"jump", 0.1, &"idle", &"run", 0.5, &"jump", &"idle", 0.1, &"jump", &"run", 0.1, &"jump", &"swimming", 0.5, &"run", &"idle", 0.5, &"run", &"jump", 0.1]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wtcfe")
