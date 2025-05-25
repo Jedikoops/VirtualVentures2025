@@ -1,17 +1,81 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3d22mb6yitfn"]
+[gd_scene load_steps=12 format=3 uid="uid://c3d22mb6yitfn"]
 
 [ext_resource type="Script" uid="uid://prakt7j3tgk4" path="res://EvilStuff/space_ship.gd" id="1_3jc1u"]
-[ext_resource type="Texture2D" uid="uid://bag61i73805ns" path="res://icon.svg" id="2_ow33v"]
+[ext_resource type="Texture2D" uid="uid://b60k1v7vlh1x4" path="res://Sprites/UFO.png" id="2_ow33v"]
+[ext_resource type="Script" uid="uid://c730s6b6xc1bh" path="res://EvilStuff/stab_zone.gd" id="3_ow33v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qbnm"]
 size = Vector2(32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qbnm"]
+atlas = ExtResource("2_ow33v")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj8ba"]
+atlas = ExtResource("2_ow33v")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nn4x"]
+atlas = ExtResource("2_ow33v")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k31cg"]
+atlas = ExtResource("2_ow33v")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_veuhm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qbnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj8ba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nn4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k31cg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jc1u"]
+size = Vector2(36, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow33v"]
+size = Vector2(32, 32)
+
 [node name="SpaceShip" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_3jc1u")
+DAMAGE = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8qbnm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_ow33v")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_veuhm")
+
+[node name="StabZone" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("3_ow33v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StabZone"]
+shape = SubResource("RectangleShape2D_3jc1u")
+
+[node name="Death" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
+shape = SubResource("RectangleShape2D_ow33v")
+
+[connection signal="body_entered" from="StabZone" to="." method="_on_stab_zone_body_entered"]
+[connection signal="body_exited" from="StabZone" to="." method="_on_stab_zone_body_exited"]
+[connection signal="area_entered" from="Death" to="." method="_on_death_area_entered"]

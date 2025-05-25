@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://xbdx565g7sfe"]
+
+[ext_resource type="Script" uid="uid://c730s6b6xc1bh" path="res://EvilStuff/stab_zone.gd" id="1_8c03r"]
+[ext_resource type="Texture2D" uid="uid://csvwv6g32dbpl" path="res://Sprites/Spikes.png" id="2_oygxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxbo8"]
+size = Vector2(64, 39)
+
+[node name="Spikes" type="Area2D"]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_8c03r")
+DAMAGE = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.2, -8.2)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_vxbo8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.88178e-16, -12)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_oygxb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

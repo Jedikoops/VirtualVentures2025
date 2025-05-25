@@ -83,7 +83,6 @@ shape = SubResource("RectangleShape2D_jcvyl")
 
 [node name="health_component" type="Node" parent="CharacterBody2D"]
 script = ExtResource("5_ta6jo")
-metadata/_custom_type_script = "uid://bljm6jnff25br"
 
 [node name="hitbox" type="Area2D" parent="."]
 position = Vector2(217, 76)
@@ -98,4 +97,3 @@ scale = Vector2(0.14, 0.14)
 texture = ExtResource("4_jcvyl")
 
 [connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/health_component" method="_on_hurtbox_entered"]
-[connection signal="die" from="CharacterBody2D/health_component" to="CharacterBody2D" method="_on_die"]

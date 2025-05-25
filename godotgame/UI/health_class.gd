@@ -1,7 +1,7 @@
 class_name health_component extends Node
 
 @export var parent: Node
-@export var MAX_HEALTH = 5
+@export var MAX_HEALTH = 100.0
 var health
 #signal die
 
@@ -11,13 +11,19 @@ func _ready() -> void:
 	if parent == null:
 		parent = get_parent()
 
-func take_damage(amount := 1):
+func take_damage(amount := 1.0):
+	#print(amount)
 	health -= amount
-	if health <=0:
+	if health <= 0.0:
 		#die.emit()
 		parent.queue_free()
 	#print("yeouch")
 
 func _on_hurtbox_entered(area: Area2D) -> void:
-	take_damage()
+	if area.has_method("getDamage"):
+		take_damage(area.getDamage())
+	else:
+		take_damage()
+	print((area.position - get_parent().position).normalized())
+	get_parent().velocity += (area.position - get_parent().position).normalized() * -1000.0
 	#connect this to an area2D that is only on layer
