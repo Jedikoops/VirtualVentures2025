@@ -22,7 +22,7 @@ var glide_angle = 20.0 # degrees downward by default
 var is_gliding = false
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Collision with Area2D layer 2
 	
 
 	# Handle jump.
@@ -58,3 +58,7 @@ func apply_friction(delta) -> void:
 	var friction_amount: = friction
 	if not is_on_floor(): friction_amount = air_friction
 	velocity.x = move_toward(velocity.x, 0.0, friction_amount * delta)
+
+
+func _on_die() -> void:
+	queue_free()

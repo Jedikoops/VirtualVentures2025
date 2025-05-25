@@ -1,13 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://caa61iuxg0w8g"]
+[gd_scene load_steps=10 format=3 uid="uid://caa61iuxg0w8g"]
 
 [ext_resource type="Texture2D" uid="uid://bag61i73805ns" path="res://icon.svg" id="1_ovuq3"]
 [ext_resource type="Script" uid="uid://jqdtut8cw1am" path="res://elytra_glide.gd" id="2_ri33v"]
 [ext_resource type="Texture2D" uid="uid://d1ui8slgewlny" path="res://arrow.png" id="2_yb07m"]
+[ext_resource type="Texture2D" uid="uid://cluo4meuwdxlk" path="res://UI/circle.png" id="4_jcvyl"]
+[ext_resource type="Script" uid="uid://bljm6jnff25br" path="res://UI/health_class.gd" id="5_ta6jo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yb07m"]
 size = Vector2(302, 43)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ri33v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcvyl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7awnh"]
+radius = 48.5077
 
 [node name="Node2D" type="Node2D"]
 
@@ -58,6 +65,7 @@ texture = ExtResource("1_ovuq3")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(72, 25)
+collision_layer = 0
 script = ExtResource("2_ri33v")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -65,3 +73,29 @@ texture = ExtResource("2_yb07m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_ri33v")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+shape = SubResource("RectangleShape2D_jcvyl")
+
+[node name="health_component" type="Node" parent="CharacterBody2D"]
+script = ExtResource("5_ta6jo")
+metadata/_custom_type_script = "uid://bljm6jnff25br"
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(217, 76)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_7awnh")
+
+[node name="Sprite2D" type="Sprite2D" parent="hitbox"]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("4_jcvyl")
+
+[connection signal="area_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D/health_component" method="_on_hurtbox_entered"]
+[connection signal="die" from="CharacterBody2D/health_component" to="CharacterBody2D" method="_on_die"]

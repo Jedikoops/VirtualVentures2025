@@ -71,6 +71,8 @@ func _physics_process(delta: float) -> void:
 					jump(JUMP_VELOCITY * 1.2)
 					state = STATE.MOVE
 					reset_flip()
+			if is_on_floor():
+				state = STATE.MOVE
 			if not climbing:
 				state = STATE.MOVE
 			
@@ -111,68 +113,8 @@ func _physics_process(delta: float) -> void:
 			
 			apply_friction(delta, 0.2 * Vector2.ONE)
 			move_and_slide()
-			
-	#
-	#if Input.is_action_pressed("ui_up"):
-		#gliding = true
-	#else:
-		#gliding = false
-	## Add the gravity.
-	#if not is_on_floor() and not (Input.is_action_pressed("debug") and climbing):
-		#if swimming:
-			#anim.play("swimming")
-		#elif gliding:
-			#anim.play("flying")
-			#fly_uptime.start()
-		#else:
-			#anim.play("jump")
-	#if not is_on_floor() and not swimming:
-		#if gliding and velocity.y > 0:
-			#velocity.y = move_toward(velocity.y, -30, GLIDE_SPEED)
-		#else:
-			#velocity += get_gravity() * delta
-	#else:
-		#exhausted = false
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept"):
-		#if is_on_floor():
-			#velocity.y = JUMP_VELOCITY
-		#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#var updir := Input.get_axis("ui_up", "ui_down")
-	#
-	#if Input.is_action_pressed("debug") and climbing and not exhausted and climb_cooldown.is_stopped():
-		#velocity.y = updir * SPEED
-		#velocity.x = direction * SPEED
-		#anim.play("climbing")
-		#if not direction and not updir:
-			#anim.pause()
-	#elif direction:
-		#velocity.x = direction * SPEED
-	#
-			#
-		#if is_on_floor():	
-			#anim.play("run")
-	#
-	#
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-		#if is_on_floor():
-			#anim.play("idle")
-#
-	#if direction > 0: 
-		#rig.scale.x = -1
-	#if direction < 0:
-		#rig.scale.x = 1
-	##print(climbing)
-	#
-	#velocity.y -= _get_tile_force() * delta
-	#if swimming:
-		#velocity.y = velocity.y * (1-delta * 0.8)
-	#
-	#move_and_slide()
+		STATE.DIG:
+			pass
 
 func _on_climbing_body_entered(body: Node2D) -> void:
 	climbing = true
