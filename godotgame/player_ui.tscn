@@ -1,0 +1,241 @@
+[gd_scene load_steps=18 format=3 uid="uid://d0ihvrdil8eob"]
+
+[ext_resource type="Script" uid="uid://bymjmyf5wg7qk" path="res://player_ui.gd" id="1_654h1"]
+[ext_resource type="FontFile" uid="uid://bv52yqjjha7sh" path="res://PatrickHand-Regular.ttf" id="2_654h1"]
+[ext_resource type="Texture2D" uid="uid://bg42u4n1ugjr6" path="res://Sprite-0008.png" id="3_tybkg"]
+[ext_resource type="Texture2D" uid="uid://dmc3xf5gtk76g" path="res://UI/claw.png" id="4_a4em4"]
+[ext_resource type="Texture2D" uid="uid://dprekltfj28r1" path="res://fish.png" id="5_a4em4"]
+[ext_resource type="Texture2D" uid="uid://dc7ac54d1lk14" path="res://wing.png" id="6_gxl1c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxl1c"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.168627, 0.164706, 0.152941, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3go5w"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.666667)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.678431, 0.639216, 0.627451, 0.592157)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6r6c"]
+bg_color = Color(0.07, 0.0546, 0.05537, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdubu"]
+bg_color = Color(0.2706, 0.82, 0.444577, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4em4"]
+atlas = ExtResource("3_tybkg")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxl1c"]
+atlas = ExtResource("3_tybkg")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg8o0"]
+atlas = ExtResource("3_tybkg")
+region = Rect2(80, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiloj"]
+atlas = ExtResource("3_tybkg")
+region = Rect2(96, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbg41"]
+atlas = ExtResource("3_tybkg")
+region = Rect2(112, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_babf8"]
+atlas = ExtResource("3_tybkg")
+region = Rect2(128, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qadsr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4em4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxl1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg8o0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiloj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbg41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_babf8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerUI" type="CanvasLayer"]
+script = ExtResource("1_654h1")
+
+[node name="HealthBarWidget" type="MarginContainer" parent="."]
+offset_right = 493.0
+offset_bottom = 172.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer2" type="PanelContainer" parent="HealthBarWidget"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gxl1c")
+
+[node name="PanelContainer" type="PanelContainer" parent="HealthBarWidget/PanelContainer2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3go5w")
+
+[node name="MarginContainer" type="MarginContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Name" type="Label" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_654h1")
+theme_override_font_sizes/font_size = 49
+text = "Koops"
+
+[node name="Health" type="ProgressBar" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(81.275, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_q6r6c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kdubu")
+value = 65.62
+show_percentage = false
+
+[node name="HSeparator" type="HSeparator" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="MarginContainer4" type="MarginContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer4"]
+position = Vector2(43, 31)
+scale = Vector2(2.53126, 2.53126)
+sprite_frames = SubResource("SpriteFrames_qadsr")
+frame_progress = 0.0813029
+
+[node name="Coins" type="Label" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_654h1")
+theme_override_font_sizes/font_size = 26
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Climb" type="TextureRect" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_a4em4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Swim" type="TextureRect" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_a4em4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MarginContainer3" type="MarginContainer" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Fly" type="TextureRect" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_gxl1c")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Clock" type="Label" parent="HealthBarWidget/PanelContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_654h1")
+theme_override_font_sizes/font_size = 26
+text = "Clock shenanigans 3232"
+horizontal_alignment = 2

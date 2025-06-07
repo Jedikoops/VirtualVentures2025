@@ -1,0 +1,189 @@
+[gd_scene load_steps=10 format=3 uid="uid://ceh3d4bvi2o0i"]
+
+[ext_resource type="Script" uid="uid://dka58r06df0co" path="res://popup_ui.gd" id="1_kiaqn"]
+[ext_resource type="Texture2D" uid="uid://n82a5le1eigt" path="res://flower_complete.png" id="1_ob4oa"]
+[ext_resource type="FontFile" uid="uid://bv52yqjjha7sh" path="res://PatrickHand-Regular.ttf" id="2_kiaqn"]
+
+[sub_resource type="Animation" id="Animation_vg8o0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_constants/margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gxl1c"]
+resource_name = "collect"
+length = 2.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_constants/margin_bottom")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-75, 25, 25, 50]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"die"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vg8o0"]
+_data = {
+&"RESET": SubResource("Animation_vg8o0"),
+&"collect": SubResource("Animation_gxl1c")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vg8o0"]
+bg_color = Color(0.22, 0.22, 0.22, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.17, 0.16541, 0.1547, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4em4"]
+bg_color = Color(0.12, 0.12, 0.12, 0.666667)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.68, 0.637387, 0.6256, 0.592157)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gxl1c"]
+
+[node name="PopupUI" type="CanvasLayer"]
+script = ExtResource("1_kiaqn")
+
+[node name="Notification" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -193.5
+offset_top = -74.0
+offset_right = 193.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Notification"]
+libraries = {
+&"": SubResource("AnimationLibrary_vg8o0")
+}
+autoplay = "collect"
+
+[node name="PanelContainer" type="PanelContainer" parent="Notification"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_vg8o0")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Notification/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a4em4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Notification/PanelContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Notification/PanelContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Notification/PanelContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_ob4oa")
+expand_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="Notification/PanelContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gxl1c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notification/PanelContainer/PanelContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PopupTitle" type="Label" parent="Notification/PanelContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_kiaqn")
+theme_override_font_sizes/font_size = 18
+text = "Flag Collected"
+horizontal_alignment = 2
+
+[node name="PopupDesc" type="Label" parent="Notification/PanelContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.56, 0.56, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_kiaqn")
+theme_override_font_sizes/font_size = 12
+text = "(5/8)"
+horizontal_alignment = 2

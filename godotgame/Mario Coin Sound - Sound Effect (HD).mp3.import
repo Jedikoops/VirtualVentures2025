@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b2wtmuob0c0qj"
+path="res://.godot/imported/Mario Coin Sound - Sound Effect (HD).mp3-ec716f96cedb744848b7a2f4ddda7e39.mp3str"
+
+[deps]
+
+source_file="res://Mario Coin Sound - Sound Effect (HD).mp3"
+dest_files=["res://.godot/imported/Mario Coin Sound - Sound Effect (HD).mp3-ec716f96cedb744848b7a2f4ddda7e39.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

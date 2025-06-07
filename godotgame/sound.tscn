@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://w7mhf7byk343"]
+
+[ext_resource type="AudioStream" uid="uid://b2wtmuob0c0qj" path="res://Mario Coin Sound - Sound Effect (HD).mp3" id="1_7ywqe"]
+[ext_resource type="Script" uid="uid://yqnw82irw5x1" path="res://sound.gd" id="2_tdv2v"]
+
+[node name="Sound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_7ywqe")
+autoplay = true
+script = ExtResource("2_tdv2v")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

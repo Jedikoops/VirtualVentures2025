@@ -1,0 +1,30 @@
+[gd_scene load_steps=10 format=3 uid="uid://cktrlxt60cucb"]
+
+[ext_resource type="Script" uid="uid://bfw31shfgjgmp" path="res://collectible.gd" id="1_mr1af"]
+[ext_resource type="Texture2D" uid="uid://d1ui8slgewlny" path="res://arrow.png" id="2_q0msd"]
+[ext_resource type="AudioStream" uid="uid://b2wtmuob0c0qj" path="res://Mario Coin Sound - Sound Effect (HD).mp3" id="2_wammx"]
+[ext_resource type="AudioStream" uid="uid://c7ow8x14s21n" path="res://birdchirpcollect.mp3" id="4_oc26g"]
+[ext_resource type="AudioStream" uid="uid://b20y46x5wgatw" path="res://Goose2.wav" id="4_wammx"]
+[ext_resource type="AudioStream" uid="uid://c0830gqw5c3b6" path="res://Bear Roar Sound Effect.mp3" id="5_q0msd"]
+[ext_resource type="Script" uid="uid://cbfokb35106xc" path="res://audio_manager.gd" id="7_wammx"]
+[ext_resource type="PackedScene" uid="uid://w7mhf7byk343" path="res://sound.tscn" id="8_q0msd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kdubu"]
+
+[node name="Collectible" type="Area2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_mr1af")
+fly = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kdubu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_q0msd")
+
+[node name="Sound" type="Node" parent="."]
+script = ExtResource("7_wammx")
+sound_list = Array[AudioStream]([ExtResource("4_oc26g"), ExtResource("4_wammx"), ExtResource("5_q0msd"), ExtResource("2_wammx")])
+sound = ExtResource("8_q0msd")

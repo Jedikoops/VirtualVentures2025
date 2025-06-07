@@ -1,16 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://g8pxd5xnjfbl"]
+[gd_scene load_steps=17 format=3 uid="uid://g8pxd5xnjfbl"]
 
 [ext_resource type="Script" uid="uid://c05gmk5axcirt" path="res://Levels/player.gd" id="1_wpacq"]
-[ext_resource type="Script" uid="uid://cbfokb35106xc" path="res://audio_manager.gd" id="2_3go5w"]
 [ext_resource type="Texture2D" uid="uid://crn2hga5rv214" path="res://person.png" id="2_esvua"]
-[ext_resource type="PackedScene" uid="uid://w7mhf7byk343" path="res://sound.tscn" id="3_3quuv"]
 [ext_resource type="Script" uid="uid://bljm6jnff25br" path="res://UI/health_class.gd" id="3_esvua"]
-[ext_resource type="PackedScene" uid="uid://d0ihvrdil8eob" path="res://player_ui.tscn" id="4_3deb3"]
-[ext_resource type="Texture2D" uid="uid://n82a5le1eigt" path="res://flower_complete.png" id="6_3quuv"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtcfe"]
-radius = 16.0
-height = 84.8485
 
 [sub_resource type="Animation" id="Animation_0e48y"]
 length = 0.001
@@ -1220,9 +1212,9 @@ _data = {
 &"swimming": SubResource("Animation_esvua")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3deb3"]
-radius = 15.1515
-height = 66.6667
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wtcfe"]
+radius = 16.0
+height = 66.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wpacq"]
 radius = 15.1515
@@ -1238,33 +1230,12 @@ radius = 7.0
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(0.33, 0.33)
 collision_layer = 0
+collision_mask = 9
 script = ExtResource("1_wpacq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_wtcfe")
-
-[node name="sound_creator" type="Node" parent="."]
-script = ExtResource("2_3go5w")
-sound_list = Array[AudioStream]([null, null, null, null, null, null, null])
-sound = ExtResource("3_3quuv")
-metadata/_custom_type_script = "uid://cbfokb35106xc"
-
-[node name="CanvasLayer" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_3deb3")]
-health = NodePath("../health_component")
-
-[node name="health_component" type="Timer" parent="." node_paths=PackedStringArray("parent")]
-wait_time = 0.15
-one_shot = true
-script = ExtResource("3_esvua")
-parent = NodePath("..")
-MAX_HEALTH = 5.0
-metadata/_custom_type_script = "uid://bljm6jnff25br"
-
 [node name="CharacterRig" type="Sprite2D" parent="."]
-texture = ExtResource("6_3quuv")
 
 [node name="Torso" type="Sprite2D" parent="CharacterRig"]
-visible = false
 z_index = 2
 texture = ExtResource("2_esvua")
 region_enabled = true
@@ -1300,18 +1271,18 @@ region_rect = Rect2(75.2157, 43.7878, 22.1979, 27.1049)
 position = Vector2(4, 14)
 rotation = 0.00872427
 texture = ExtResource("2_esvua")
-offset = Vector2(-1, 11.815)
+offset = Vector2(-1, 7)
 region_enabled = true
-region_rect = Rect2(75.9639, 71.9283, 26.329, 45.1107)
+region_rect = Rect2(79.1879, 80.7065, 19.8613, 26.1702)
 
 [node name="RightLeg" type="Sprite2D" parent="CharacterRig/Torso"]
 z_index = -1
 position = Vector2(-7, 14)
 rotation = 0.0208679
 texture = ExtResource("2_esvua")
-offset = Vector2(-2.639, 16.023)
+offset = Vector2(-2.63893, 7.82253)
 region_enabled = true
-region_rect = Rect2(77.2673, 83.7441, 22.3885, 32.9003)
+region_rect = Rect2(78.4869, 83.7441, 19.6277, 24.5346)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterRig"]
 unique_name_in_owner = true
@@ -1321,12 +1292,8 @@ libraries = {
 autoplay = "idle"
 blend_times = [&"climbing", &"flying", 0.2, &"climbing", &"idle", 0.5, &"climbing", &"jump", 0.05, &"climbing", &"run", 0.5, &"climbing", &"swimming", 0.5, &"flying", &"climbing", 0.5, &"flying", &"flying", 0.2, &"flying", &"idle", 0.5, &"flying", &"jump", 0.5, &"flying", &"run", 0.5, &"flying", &"swimming", 0.5, &"idle", &"jump", 0.1, &"idle", &"run", 0.5, &"jump", &"idle", 0.1, &"jump", &"run", 0.1, &"jump", &"swimming", 0.5, &"run", &"idle", 0.5, &"run", &"jump", 0.1]
 
-[node name="Collecting" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collecting"]
-shape = SubResource("CapsuleShape2D_3deb3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wtcfe")
 
 [node name="Climbing" type="Area2D" parent="."]
 collision_layer = 2
@@ -1336,6 +1303,7 @@ collision_mask = 2
 shape = SubResource("CapsuleShape2D_wpacq")
 
 [node name="SwimDetector" type="Area2D" parent="."]
+scale = Vector2(1, 1)
 collision_layer = 4
 collision_mask = 4
 
@@ -1350,12 +1318,15 @@ collision_mask = 128
 [node name="EnemyCollider" type="CollisionShape2D" parent="EnemyDetector"]
 shape = SubResource("CircleShape2D_3deb3")
 
-[connection signal="timeout" from="health_component" to="health_component" method="_on_timeout"]
-[connection signal="area_entered" from="Collecting" to="." method="_on_collecting_area_entered"]
-[connection signal="area_exited" from="Collecting" to="." method="_on_collecting_area_exited"]
+[node name="health_component" type="Timer" parent="." node_paths=PackedStringArray("parent")]
+wait_time = 0.6
+one_shot = true
+script = ExtResource("3_esvua")
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://bljm6jnff25br"
+
 [connection signal="body_entered" from="Climbing" to="." method="_on_climbing_body_entered"]
 [connection signal="body_exited" from="Climbing" to="." method="_on_climbing_body_exited"]
 [connection signal="body_entered" from="SwimDetector" to="." method="_on_swim_detector_body_entered"]
 [connection signal="body_exited" from="SwimDetector" to="." method="_on_swim_detector_body_exited"]
 [connection signal="area_entered" from="EnemyDetector" to="health_component" method="_on_hurtbox_entered"]
-[connection signal="body_entered" from="EnemyDetector" to="health_component" method="_on_hurtbody_entered"]

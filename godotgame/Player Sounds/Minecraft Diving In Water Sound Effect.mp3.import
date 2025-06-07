@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csb46cb8pm7hg"
+path="res://.godot/imported/Minecraft Diving In Water Sound Effect.mp3-d692c613cdc345692cda086d85490c12.mp3str"
+
+[deps]
+
+source_file="res://Player Sounds/Minecraft Diving In Water Sound Effect.mp3"
+dest_files=["res://.godot/imported/Minecraft Diving In Water Sound Effect.mp3-d692c613cdc345692cda086d85490c12.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

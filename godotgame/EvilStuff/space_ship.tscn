@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3d22mb6yitfn"]
+[gd_scene load_steps=14 format=3 uid="uid://c3d22mb6yitfn"]
 
 [ext_resource type="Script" uid="uid://prakt7j3tgk4" path="res://EvilStuff/space_ship.gd" id="1_3jc1u"]
 [ext_resource type="Texture2D" uid="uid://b60k1v7vlh1x4" path="res://Sprites/UFO.png" id="2_ow33v"]
-[ext_resource type="Script" uid="uid://c730s6b6xc1bh" path="res://EvilStuff/stab_zone.gd" id="3_ow33v"]
+[ext_resource type="Script" uid="uid://cbfokb35106xc" path="res://audio_manager.gd" id="4_gj8ba"]
+[ext_resource type="PackedScene" uid="uid://w7mhf7byk343" path="res://sound.tscn" id="5_6nn4x"]
+[ext_resource type="AudioStream" uid="uid://bdyu8rygxdyou" path="res://cheer.mp3" id="5_k31cg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qbnm"]
-size = Vector2(32, 32)
+size = Vector2(32, 30)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qbnm"]
 atlas = ExtResource("2_ow33v")
@@ -43,40 +45,48 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jc1u"]
-size = Vector2(36, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ow33v"]
+radius = 7.99874
+height = 31.995
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow33v"]
-size = Vector2(32, 36)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ow33v"]
 
 [node name="SpaceShip" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_3jc1u")
-DAMAGE = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_8qbnm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_veuhm")
 
-[node name="StabZone" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 0
-script = ExtResource("3_ow33v")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StabZone"]
-shape = SubResource("RectangleShape2D_3jc1u")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2.66454e-15, 3)
+rotation = 1.55304
+shape = SubResource("CapsuleShape2D_ow33v")
 
-[node name="Death" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_ow33v")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -5.5)
+rotation = 0.345416
+shape = SubResource("CircleShape2D_ow33v")
 
-[connection signal="body_entered" from="StabZone" to="." method="_on_stab_zone_body_entered"]
-[connection signal="body_exited" from="StabZone" to="." method="_on_stab_zone_body_exited"]
-[connection signal="area_entered" from="Death" to="." method="_on_death_area_entered"]
+[node name="SmartSound" type="Node" parent="."]
+script = ExtResource("4_gj8ba")
+sound_list = Array[AudioStream]([ExtResource("5_k31cg")])
+sound = ExtResource("5_6nn4x")
+metadata/_custom_type_script = "uid://cbfokb35106xc"
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_stab_zone_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_stab_zone_body_exited"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_death_area_entered"]
