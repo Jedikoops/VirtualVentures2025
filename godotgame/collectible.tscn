@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cktrlxt60cucb"]
+[gd_scene load_steps=9 format=3 uid="uid://cktrlxt60cucb"]
 
 [ext_resource type="Script" uid="uid://bfw31shfgjgmp" path="res://collectible.gd" id="1_mr1af"]
-[ext_resource type="Texture2D" uid="uid://d1ui8slgewlny" path="res://arrow.png" id="2_q0msd"]
 [ext_resource type="AudioStream" uid="uid://b2wtmuob0c0qj" path="res://Mario Coin Sound - Sound Effect (HD).mp3" id="2_wammx"]
 [ext_resource type="AudioStream" uid="uid://c7ow8x14s21n" path="res://birdchirpcollect.mp3" id="4_oc26g"]
 [ext_resource type="AudioStream" uid="uid://b20y46x5wgatw" path="res://Goose2.wav" id="4_wammx"]
@@ -22,7 +21,6 @@ shape = SubResource("CircleShape2D_kdubu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_q0msd")
 
 [node name="Sound" type="Node" parent="."]
 script = ExtResource("7_wammx")

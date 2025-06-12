@@ -112,7 +112,6 @@ func _physics_process(delta: float) -> void:
 			rig.rotation_degrees -= 300*delta*x_input
 			velocity = Vector2.LEFT.rotated(rig.rotation) * velocity.length()
 			apply_gravity(delta, get_gravity() * 0.6)
-			print(rig.rotation_degrees)
 			if is_on_floor():
 				state = STATE.MOVE
 				reset_flip()
@@ -145,7 +144,6 @@ func _on_swim_detector_body_exited(body: Node2D) -> void:
 	swimming = false
 	
 func _on_collecting_area_entered(area: Area2D) -> void:
-	print(area.get_class())
 	if area is collectible:
 		set_values(area.get_fly(), area.get_climb(), area.get_swim(), area.get_points())
 		area.die()
@@ -156,10 +154,6 @@ func _on_collecting_area_entered(area: Area2D) -> void:
 			NotifyMe.show_me("Checkpoint Get!", checkpoint, WIN_CHECKPOINT, CHECKPOINT)
 			if checkpoint >= WIN_CHECKPOINT:
 				win()
-		print(checkpoint)
-		
-func _on_collecting_area_exited(area: Area2D) -> void:
-	pass
 
 func apply_gravity(delta, amount: Vector2 = get_gravity()) -> void:
 	velocity += amount * delta
@@ -205,7 +199,3 @@ func respawn():
 
 func win():
 	NotifyMe.show_me("You Win!", checkpoint, WIN_CHECKPOINT, CHECKPOINT)
-
-
-func finished() -> void:
-	pass # Replace with function body.
